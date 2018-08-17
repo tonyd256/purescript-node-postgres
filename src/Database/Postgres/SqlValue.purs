@@ -28,6 +28,9 @@ instance isSqlValueNumber :: IsSqlValue Number where
 instance isSqlValueInt :: IsSqlValue Int where
   toSql = unsafeCoerce <<< toNumber
 
+instance isSqlValueBoolean :: IsSqlValue Boolean where
+  toSql = unsafeCoerce
+
 instance isSqlValueMaybe :: (IsSqlValue a) => IsSqlValue (Maybe a) where
   toSql = unsafeCoerce <<< toNullable <<< (toSql <$> _)
 
